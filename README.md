@@ -1,8 +1,7 @@
 # Sorts Lab
 
-* Authors: _(TODO: list your names here)_
+* Authors: Tiffany Tang, Annie Li
 
 ## Resources Used
 
-* _(TODO: list your resources here!)_
-* ...
+* https://osera.cs.grinnell.edu/ttap/data-structures-labs/sorts.html
