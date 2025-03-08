@@ -109,15 +109,52 @@ public class Sorts {
     }
 
     /**
+     * 
+     * @param <T> the carrier type of the array
+     * @param arr1 the array to merge
+     * @param arr2 the array to merge (we assume both arr1 and arr2 are sorted from the smallest to the largest
+     * @return 
+     */
+    public static <T extends Comparable<? super T>> T[] merge(T[] arr1, T[] arr2) {
+        T[] result = (T[]) new Comparable[arr1.length + arr2.length];
+        int i = 0, j = 0, k = 0;
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i].compareTo(arr2[j]) <= 0) {
+                result[k++] = arr1[i++];
+            } else {
+                result[k++] = arr2[j++];
+            }
+        }
+        while (i < arr1.length) {
+            result[k++] = arr1[i++];
+        }
+        while (j < arr2.length) {
+            result[k++] = arr2[j++];
+        }
+        return result;
+    }
+
+    /**
      * Sorts the array according to the merge sort algorithm:
      * <pre>
      * [ sorted | sorted ] -> [ sorted ]
      * </pre>
+     *
      * @param <T> the carrier type of the array
      * @param arr the array to sort
      */
     public static <T extends Comparable<? super T>> void mergeSort(T[] arr) {
-        // TODO: fill me in!
+        if (arr.length > 1) {
+            int mid = arr.length / 2;
+            T[] left = (T[]) new Comparable[mid];
+            T[] right = (T[]) new Comparable[arr.length - mid];
+            System.arraycopy(arr, 0, left, 0, mid);
+            System.arraycopy(arr, mid, right, 0, arr.length-mid);
+            mergeSort(left);
+            mergeSort(right);
+            T[] merged = merge(left, right);
+            System.arraycopy(merged, 0, arr, 0, merged.length);
+        }
     }
 
     /**
