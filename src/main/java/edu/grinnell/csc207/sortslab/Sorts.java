@@ -81,7 +81,15 @@ public class Sorts {
      * @param arr the array to sort
      */
     public static <T extends Comparable<? super T>> void selectionSort(T[] arr) {
-
+        for (int m = 0; m < arr.length - 1; m++) {
+            int min = m;
+            for (int n = m + 1; n < arr.length; n++) {
+                if (arr[n].compareTo(arr[min]) < 0) {
+                    min = n;
+                }
+            }
+            swap(arr, m, min);
+        }
     }
 
     /**
