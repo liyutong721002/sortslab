@@ -157,15 +157,44 @@ public class Sorts {
         }
     }
 
+    public static <T extends Comparable<? super T>> int partition(T[] arr) {
+        int i = -1;
+        int j = 0;
+        T pivot = arr[arr.length - 1];
+        while (j < arr.length - 1) {
+
+            if (arr[j].compareTo(pivot) <= 0) {
+                i++;
+                swap(arr, i, j);
+                j++;
+            } else {
+                j++;
+            }
+        }
+        swap(arr, i + 1, arr.length - 1);
+        return i + 1;
+    }
+
     /**
      * Sorts the array according to the quick sort algorithm:
      * <pre>
      * []
      * </pre>
+     *
      * @param <T>
      * @param arr
      */
     public static <T extends Comparable<? super T>> void quickSort(T[] arr) {
-        // TODO: fill me in!
+        if (arr.length > 1) {
+            int pivot = partition(arr);
+            T[] left = (T[]) new Comparable[pivot];
+            T[] right = (T[]) new Comparable[arr.length - pivot - 1];
+            System.arraycopy(arr, 0, left, 0, pivot);
+            System.arraycopy(arr, pivot + 1, right, 0, arr.length - pivot - 1);
+            quickSort(left);
+            quickSort(right);
+            System.arraycopy(left, 0, arr, 0, left.length);
+            System.arraycopy(right, 0, arr, pivot + 1, right.length);
+        }
     }
 }
